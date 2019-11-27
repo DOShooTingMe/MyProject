@@ -6,3 +6,6 @@ git branch -r :查看远程分支
 二.问题
 2.1出现：fatal:Not a valid object name:'master'
 原因是没有提交一个对象，要先commit之后才会真正建立master分支，此时才可以建立其它分支。
+
+测试addasdfaaaaaaaa
+1
