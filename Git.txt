@@ -1,11 +1,12 @@
 Git
-Ò».ÃüÁî
-git branch :²é¿´±¾µØ·ÖÖ§
-git branch -a :²é¿´È«²¿·ÖÖ§
-git branch -r :²é¿´Ô¶³Ì·ÖÖ§
-¶ş.ÎÊÌâ
-2.1³öÏÖ£ºfatal:Not a valid object name:'master'
-Ô­ÒòÊÇÃ»ÓĞÌá½»Ò»¸ö¶ÔÏó£¬ÒªÏÈcommitÖ®ºó²Å»áÕæÕı½¨Á¢master·ÖÖ§£¬´ËÊ±²Å¿ÉÒÔ½¨Á¢ÆäËü·ÖÖ§¡£
+ä¸€.å‘½ä»¤
+git branch :æŸ¥çœ‹æœ¬åœ°åˆ†æ”¯
+git branch -a :æŸ¥çœ‹å…¨éƒ¨åˆ†æ”¯
+git branch -r :æŸ¥çœ‹è¿œç¨‹åˆ†æ”¯
+äºŒ.é—®é¢˜
+2.1å‡ºç°ï¼šfatal:Not a valid object name:'master'
+åŸå› æ˜¯æ²¡æœ‰æäº¤ä¸€ä¸ªå¯¹è±¡ï¼Œè¦å…ˆcommitä¹‹åæ‰ä¼šçœŸæ­£å»ºç«‹masteråˆ†æ”¯ï¼Œæ­¤æ—¶æ‰å¯ä»¥å»ºç«‹å…¶å®ƒåˆ†æ”¯ã€‚
 
-²âÊÔaddasdfaaaaaaaa
+æµ‹è¯•addasdfaaaaaaaa
 1
+developåˆ†æ”¯åœ¨äº‘ç«¯ä¿®æ”¹
