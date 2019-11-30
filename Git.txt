@@ -9,3 +9,5 @@ git branch -r :查看远程分支
 
 测试addasdfaaaaaaaa
 1
+
+如果不更新就修改；
