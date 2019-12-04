@@ -3,13 +3,112 @@ Git
 git branch :查看本地分支
 git branch -a :查看全部分支
 git branch -r :查看远程分支
+
+git pull ：拉取
+git commit a:提交a文件，默认打开编辑器输入commit message
+git commit a -m 'message' :提交a文件
+git push a：推入a文件
+
+git branch develop:创建develop分支
+git checkout develop
+git push origin develop：将本地develop分支推入
+git branch -D text:将本地text分支删除
+git push origin --delete text:删除远程分支
+
+文件添加
+git add A :将A文件放到暂存区
+git add * :将全部文件放到暂存区
+
+文件状态查询
+git status :查看文件的状态；
+git status -s:查看文件的状态（缩略）
+git diff --cached:查看已暂存的将要添加的下次提交里的内容
+(备注：刚修改的文件不会加载到diff中，只有暂存缓存区的才会显示)
+git diff --staged:功能同上
+
+文件提交
+git commit -a | git commit -a -m '提交内容' :将暂存区的内容提交（多个）
+
+文件删除
+git rm delete.txt :移除文件
+log(改文件夹下):git rm *.log ：删除所有log后缀的文件
+tomcat(该文件夹下):git rm log/*.log :删除所有log后缀的文件（不需要加转移字符）
+git rm -r log:删除整个文件夹；
+git rm -rf log:强力删除整个文件夹；
+
+文件移动
+git mv source destination:将source文件移动到destination文件夹中
+git mv log1.txt log  = log:git add log1.txt;tomcat:git rm -f log1.txt;
+
+查看提交历史
+git log :会按提交历史时间排序，显示文件提交者、提交邮箱、提交说明显示所有提交历史；q退出
+git log -p :用来显示每次提交的内容差异 q退出
+git log -n :n为想要显示的个数； q退出
+git log --stat:选项在每次提交的下面列出所有被修改过的文件、有多少文件被修改了以及被修改过
+的文件的哪些行被移除或是添加了。 在每次提交的最后还有一个总结(不常用)
+git log --pretty:这个选项可以指定使用不同于默认格式的方式展示提交历史。(不常用)
+
+撤销（赞）
+git commit --amend :撤销上次提交操作，这次重新将文件加入缓存区并重新提交commit内容
+
+取消暂存的文件（危险）
+git reset head 1.txt：将1.txt移除暂存区
+
+撤消对文件的修改
+git checkout -- [file]
+
+
+
+
+
+
 二.问题
 2.1出现：fatal:Not a valid object name:'master'
 原因是没有提交一个对象，要先commit之后才会真正建立master分支，此时才可以建立其它分支。
+2.2执行以下操作：
+	1.对原先的文件进行修改；
+	2.未放入暂存区直接执行 git rm -f (git rm:已经删除不掉)
+	3.由于新修改的版本没有快照，所以恢复的版本为之前的版本
 
-测试addasdfaaaaaaaa
-1
+2.3 git commit --amend操作
+	1.第一次提交A文件，commit内容为AL；
+	2.git add B;
+	3.git commit --amend 输入commit内容 ABL
+	备注：这个命令会将暂存区中的文件提交。 如果自上次提交以来你还未做任何修改（例如，在上次提交后马上执行了
+	此命令），那么快照会保持不变，而你所修改的只是提交信息。
+	$ git commit -m 'initial commit'
+	$ git add forgotten_file
+	$ git commit --amend
+	最终你只会有一个提交——第二次提交将代替第一次提交的结果
 
-如果不更新就修改；
+2.4 取消暂存的文件细解
+A / B 文件
+$ git add *
+$ git commit A -m ''
+$ git commit B -m ''      可以实现虽然git add * ；但是提交可以分批次；
+--------------------------------------------------------
+A / B 文件
+$ git status -s
+ M 1.txt(红色)
+ M 2.txt(红色)
+$ git add *
+$ git status -s
+M  1.txt(绿色)
+M  2.txt(绿色)
+$ git reset head 1.txt
+$ git status -s
+ M 1.txt(红色)
+ M 2.txt(绿色)  将1.txt移除暂存区
 
-测试diff 命令
+2.5撤消对文件的修改
+	1.$ git pull
+	2.$ git add A 
+	3.$ git commit A -m ''
+	4.修改文件内容，我们想恢复文件
+		4.1 $ git rm -f A
+		4.2 $ git commit -m ''的时候恢复就行(git没有存储A最新的快照，所以恢复之后的还是最开始pull的文件)
+		||
+		4.1 $ git checkout A 也可以
+	5.一旦 $ git add A
+	6. $ git commit A -m ''
+	7.之后的文件很难回来了，因为已经快照过了
