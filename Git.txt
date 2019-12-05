@@ -111,4 +111,4 @@ $ git status -s
 		4.1 $ git checkout A 也可以
 	5.一旦 $ git add A
 	6. $ git commit A -m ''
-	7.之后的文件很难回来了，因为已经快照过了
+	7.之后的文件很难回来了，因为已经快照过了(只要是快照过得，push都其次)
