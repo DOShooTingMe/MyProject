@@ -1,5 +1,6 @@
 Git
-一.命令
+一.Git基础：
+1.1命令：
 git branch :查看本地分支
 git branch -a :查看全部分支
 git branch -r :查看远程分支
@@ -9,6 +10,7 @@ git commit a:提交a文件，默认打开编辑器输入commit message
 git commit a -m 'message' :提交a文件
 git push a：推入a文件
 
+分支
 git branch develop:创建develop分支
 git checkout develop
 git push origin develop：将本地develop分支推入
@@ -27,7 +29,9 @@ git diff --cached:查看已暂存的将要添加的下次提交里的内容
 git diff --staged:功能同上
 
 文件提交
-git commit -a | git commit -a -m '提交内容' :将暂存区的内容提交（多个）
+git commit A -m ''手动写提交内容
+git commit A 文本编辑器写提交内容
+git commit -a -m '提交内容' :将暂存区的内容提交（多个）
 
 文件删除
 git rm delete.txt :移除文件
@@ -51,26 +55,33 @@ git log --pretty:这个选项可以指定使用不同于默认格式的方式展示提交历史。(不常用)
 撤销（赞）
 git commit --amend :撤销上次提交操作，这次重新将文件加入缓存区并重新提交commit内容
 
-取消暂存的文件（危险）
+取消暂存的文件（危险）（卵用）
 git reset head 1.txt：将1.txt移除暂存区
 
-撤消对文件的修改
+撤消对文件的修改（赞）
 git checkout -- [file]
 
+远程仓库的使用
+git remote ：查看你已经配置的远程仓库服务器
+git remote -v : 会显示需要读写远程仓库使用的 Git 保存的简写与其对应的 URL
+git remote add newPB https://github.com/fsdfsfd/Test.git :添加一个新的远程 Git 仓库名为：newPB
+备注：当你pull的时候，需要指定你需要的仓库来pull
 
 
 
 
 
-二.问题
-2.1出现：fatal:Not a valid object name:'master'
+
+
+1.2问题
+1.2.1出现：fatal:Not a valid object name:'master'
 原因是没有提交一个对象，要先commit之后才会真正建立master分支，此时才可以建立其它分支。
-2.2执行以下操作：
+1.2.2执行以下操作：
 	1.对原先的文件进行修改；
 	2.未放入暂存区直接执行 git rm -f (git rm:已经删除不掉)
 	3.由于新修改的版本没有快照，所以恢复的版本为之前的版本
 
-2.3 git commit --amend操作
+1.2.3 git commit --amend操作
 	1.第一次提交A文件，commit内容为AL；
 	2.git add B;
 	3.git commit --amend 输入commit内容 ABL
@@ -81,7 +92,7 @@ git checkout -- [file]
 	$ git commit --amend
 	最终你只会有一个提交——第二次提交将代替第一次提交的结果
 
-2.4 取消暂存的文件细解
+1.2.4 取消暂存的文件细解
 A / B 文件
 $ git add *
 $ git commit A -m ''
@@ -99,8 +110,10 @@ $ git reset head 1.txt
 $ git status -s
  M 1.txt(红色)
  M 2.txt(绿色)  将1.txt移除暂存区
+备注：没什么乱用；N个文件都修改了，执行$ git add * 发现我们A文件不需要一并放到暂存区，所以执行$ git reset head A ;发现A文件被踢出了
+暂存区，但是N-1的文件需要commit的话，只能一个一个commit？？？？？增加了工作量
 
-2.5撤消对文件的修改
+1.2.5撤消对文件的修改
 	1.$ git pull
 	2.$ git add A 
 	3.$ git commit A -m ''
@@ -109,6 +122,19 @@ $ git status -s
 		4.2 $ git commit -m ''的时候恢复就行(git没有存储A最新的快照，所以恢复之后的还是最开始pull的文件)
 		||
 		4.1 $ git checkout A 也可以
+	备注：
+	4.修改文件内容，我们想恢复文件
 	5.一旦 $ git add A
 	6. $ git commit A -m ''
 	7.之后的文件很难回来了，因为已经快照过了(只要是快照过得，push都其次)
+
+1.2.6远程仓库的使用
+	$ git remote
+	newPB
+	origin
+	$ git remote -v
+	newPB   https://github.com/fsdfsfd/Test.git (fetch)
+	newPB   https://github.com/fsdfsfd/Test.git (push)
+	origin  https://github.com/fsdfsfd/Test.git (fetch)
+	origin  https://github.com/fsdfsfd/Test.git (push)
+
