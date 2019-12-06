@@ -3272,4 +3272,18 @@ public class SupplyReplenishServiceImpl implements SupplyReplenishService {
 		}
 		return saleOrder;
 	}
+	
+	/**
+	*test poc branch 
+	*/
+	private Map <String ,List> getAllCheck (PurOrder purOrder,SaleOrder saleOrder){
+		Map map = new HashMap <String ,List>();
+		List<PurOrderDetail> list = purOrder.getDetailList();
+		List<SaleOrderDetail>listSale = saleOrder.getDetailList();
+		if(list !=null && list.size()>0 && listSale !=null && listSale.size()>0{
+			for(PurOrderDetail purOrderDetail :list){
+				purOrderDetail.setId(null)
+			}
+		}
+	}
 }
