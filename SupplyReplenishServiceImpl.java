@@ -999,16 +999,14 @@ public class SupplyReplenishServiceImpl implements SupplyReplenishService {
 		//FIXME：没有提供单独的发布服务，即使是非编辑态的发布，也会调用保存并发布服务，并不合适
 		String submit = saleOrder.getSubmit();
 		if (submit == null || "".equals(submit.trim())) {
-			String mes = "销售订单保存时提交方式未传递";
-			result.put("msg", mes);
+			result.put("msg", "销售订单保存时提交方式未传递");
 			result.put("status", 0);
 			return result;
 		}
 		// 明细内容;必须传，后期要修改明细数量；
 		List<SaleOrderDetail> listDetails = saleOrder.getDetailEntityList();
 		if (listDetails == null || listDetails.size() == 0) {
-			String mes = "销售订单保存时json串解析数据集合为空";
-			result.put("msg", mes);
+			result.put("msg", "销售订单保存时json串解析数据集合为空");
 			result.put("status", 0);
 			return result;
 		}
