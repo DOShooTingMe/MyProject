@@ -155,8 +155,46 @@ merge 这里不做解释了。用可视化来merge；
 
 想要了解更多关于不同验证缓存的可用选项，查看 凭证存储（window-控制面板-）
 
-2.6变基
+2.6变基(赞)(20191207)
 在 Git 中整合来自不同分支的修改主要有两种方法：merge 以及 rebase
+
+merge说明(赞赞)
+	1.可视化的merge不做过多说明
+	2.命令版本的merge；
+develop:$ git branch
+	* develop
+	$ add 123.txt 
+	$ git commit -a -m '新增变基文件3'
+	$ git push origin develop
+	$ git branch master | git checkout master 
+master: $ git pull origin master(拉取最新代码)
+	$ git merge develop
+	$ git push origin master(看远程仓库master分支已经有内容了)
+	$ git checkout develop
+	$ git branch -d master 
+总结：merge都是在一条分支下进行的
+命令版本的merge和可视化的merge一样；
+要被merge的文件为石；等到merge的文件为基
+问题：感觉不在统一个文件下创建master分支，直接merge  origin/master可以吗？？
+	
+
+总结：
+变基的风险
+呃，奇妙的变基也并非完美无缺，要用它得遵守一条准则：
+不要对在你的仓库外有副本的分支执行变基。
+如果你遵循这条金科玉律，就不会出差错。 否则，人民群众会仇恨你，你的朋友和家人也会嘲笑你，唾弃你。
+变基操作的实质是丢弃一些现有的提交，然后相应地新建一些内容一样但实际上不同的提交。 如果你已经将提
+交推送至某个仓库，而其他人也已经从该仓库拉取提交并进行了后续工作，此时，如果你用 git rebase 命令
+重新整理了提交并再次推送，你的同伴因此将不得不再次将他们手头的工作与你的提交进行整合，如果接下来你
+还要拉取并整合他们修改过的提交，事情就会变得一团糟。
+
+三.服务器上的Git（20191212）
+3.1协议：Git协议、SSH协议、Http协议、本地协议(local)
+
+
+
+
+
 
 
 
