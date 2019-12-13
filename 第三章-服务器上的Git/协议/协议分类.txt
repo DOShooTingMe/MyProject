@@ -1,0 +1,29 @@
+本地协议：
+	1.在D盘符建立仓库：git init | git --bare init
+	2.git add *
+	3.$ git commit -a -m '建立私仓文件1'
+
+	4.切换E盘符||设置D盘符中的文件夹为网络共享文件夹和其他电脑交互
+	5.建立文件夹并拉取D盘符仓库内的文件：$ git clone /d/zhazhazha/GitLocalRep
+	6.$ cd GitLocalRep
+	7.E盘符建立分支，修改文件
+		7.1$ git branch poc
+		7.1$ git checkout poc --修改文件--
+		7.1$ git add *
+		7.1$ git commit -a -m'在其他仓库修改文件内容'
+	8.提交文件，push文件
+		8.1$ 推送本地poc到远程仓库 
+		8.1$ git push origin poc
+	9.D盘符切换poc分支，更新内容，merge内容到master上
+		9.1$git branch 
+		9.2$ git branch checkout poc --检查是否提交仓库
+		9.3$ git branch checkout master
+		9.4$ git merge poc 
+	10.E盘符删除poc分支。结束此次修改
+	$ git branch -d poc
+	$ git push origin --delete poc
+
+出现的问题
+	1.在D盘符建立版本库的时候：命令的选择
+		1.1 $ git init (等同于可视化操作：git create rep. here)
+			|| git --bare init :有很多文件夹。。后续再看
