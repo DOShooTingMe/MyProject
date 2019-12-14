@@ -1,12 +1,12 @@
-本地协议：
+1 本地协议：
 	1.在D盘符建立仓库：git init | git --bare init
 	2.git add *
 	3.$ git commit -a -m '建立私仓文件1'
 
 	4.切换E盘符||设置D盘符中的文件夹为网络共享文件夹和其他电脑交互
-	5.建立文件夹并拉取D盘符仓库内的文件：$ git clone /d/zhazhazha/GitLocalRep
+	5.建立文件夹并拉取D盘符仓库内的文件：$ git clone /d/zhazhazha/GitLocalRep || $ git clone file:///d/zhazhazha/GitLocalRep
 	6.$ cd GitLocalRep
-	7.E盘符建立分支，修改文件
+	7.E盘符建立分支，修改文件(赞赞)
 		7.1$ git branch poc
 		7.1$ git checkout poc --修改文件--
 		7.1$ git add *
@@ -26,4 +26,38 @@
 出现的问题
 	1.在D盘符建立版本库的时候：命令的选择
 		1.1 $ git init (等同于可视化操作：git create rep. here)
-			|| git --bare init :有很多文件夹。。后续再看
+			|| git --bare init :有很多文件夹。。后续再看?????????????????????????
+	2.在E盘必须建立新分支poc才能继续工作，使用原有的develop/master 会出现一个错误，
+	该错误：[remote rejected] master -> master (branch is currently checked out)
+
+	该错误原因：
+	如果使用了git init初始化，则远程仓库的目录下，也包含work tree，
+	当本地仓库向远程仓库push时, 如果远程仓库正在push的分支上（如果当时不在push的分支，就没有问题）, 
+	那么push后的结果不会反应在work tree上,  也即在远程仓库的目录下对应的文件还是之前的内容。
+
+	错误解决方案：这是由于git默认拒绝了push操作，需要进行设置，修改.git/config文件后面添加如下代码：
+	[receive]
+	denyCurrentBranch = ignore
+
+	3.关于clone私仓的命令的区别
+		3.1$ git clone /d/zhazhazha/....
+		如果仅是指定路径，Git 会尝试使用硬链接（hard link）或直接复制所需要的文件。
+		3.2$ git clone file:///d/zhazhazha/...	
+		file://，Git 会触发平时用于网路传输资料的进程，那通常是传输效率较低的方法。
+--------------------------------------------本地协议end--------------------------------------------
+2 HTTP协议
+
+
+--------------------------------------------HTTP协议end--------------------------------------------
+
+3 SSH协议
+
+--------------------------------------------SSH协议end--------------------------------------------
+4 Git协议
+
+
+--------------------------------------------Git协议end--------------------------------------------
+网址参考：https://blog.csdn.net/sinat_32366329/article/details/102750970
+
+
+

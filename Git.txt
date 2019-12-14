@@ -190,6 +190,9 @@ master: $ git pull origin master(拉取最新代码)
 
 三.服务器上的Git（20191212）
 3.1协议：Git协议、SSH协议、Http协议、本地协议(local)
+详细内容在 D:\zhazhazha\ProjectTest\MyProject\第三章-服务器上的Git\协议\协议分类
+
+	
 
 
 
