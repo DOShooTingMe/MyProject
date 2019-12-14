@@ -46,15 +46,46 @@
 		file://，Git 会触发平时用于网路传输资料的进程，那通常是传输效率较低的方法。
 --------------------------------------------本地协议end--------------------------------------------
 2 HTTP协议
+把Git的纯仓库文件放到HTTP的文件根目录下，配置一个特定的post-update 挂钩（hook) 就搞得定。
+优点：
+架设简单
+HTTPS提供只读的仓库。
+缺点：
+clone或者狭隘仓库内容可能会花费更多的时间
 
 
 --------------------------------------------HTTP协议end--------------------------------------------
 
 3 SSH协议
+优点：
+12SSH也是唯一一个同时便于读和写操作的网络协议；
+Git和http协议都是只读的
+2.通过SSh进行访问时安全的--所有的数据传输都是加密授权的；
+3.SSH很高效，会在传输之前尽可能的压缩数据
+缺点：
+1.ssh 
 
+实践操作：
+	1.git生成ssh key ：$ ssh-keygen -t  rsa -C"472246145@qq.com"(生成key)
+	2.一路回车到底 生成文件在指定目录中：C:\Users\Mr.Liu\.ssh中的
+	3.将文件 id_rsa.pub 中的内容复制到 Git-Hub中(account-ssh-new-title-key，钥匙在本地，需要在远程仓库设置用此钥匙开锁的门)
+	4.$ git clone git@github.com:DOShooTingMe/UserSSHProject.git (SSH版本)
+	5.$ git clone https://github.com/DOShooTingMe/UserSSHProject.git (HTTP版本)
+	6.ls --> cd SSHUserProject
+	7.$ git add *    
+	7.$ git commit -a -m '创建master分支'
+
+
+参考：
+https://blog.csdn.net/qq_17011423/article/details/97243286
 --------------------------------------------SSH协议end--------------------------------------------
 4 Git协议
-
+优点：
+1.传输最快；
+缺点：
+缺少授权机制。
+一般做法是，同时提供 SSH 接口，让几个开发者拥有推送（写）权限，其他人通过git:// 拥有只读权限。 
+同时该协议还要求防火墙开放9418端口；
 
 --------------------------------------------Git协议end--------------------------------------------
 网址参考：https://blog.csdn.net/sinat_32366329/article/details/102750970
