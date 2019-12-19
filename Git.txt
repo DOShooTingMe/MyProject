@@ -194,9 +194,32 @@ master: $ git pull origin master(拉取最新代码)
 内容概括：Git四大协议的介绍，优缺点分析；Git本地协议搭建示例、GitSSH协议搭建示例、Git SSH搭建本地生成Key；
 
 3.2在服务器上搭建 Git(20191216)
+无。
 
-	
+3.3Smart HTTP(20191219)
+一般情况下SSH支持授权访问，HTTP进行无授权访问。
+Smart HTTP结合两种；
+设置 Smart HTTP 一般只需要在服务器上启用一个 Git 自带的名为 git-http-backend 的 CGI 脚
+本。 该 CGI 脚本将会读取由 git fetch 或 git push 命令向 HTTP URL 发送的请求路径和头部信息，来判断
+该客户端是否支持 HTTP 通信（不低于 1.6.6 版本的客户端支持此特性）。 如果 CGI 发现该客户端支持智能
+（Smart）模式，它将会以智能模式与它进行通信，否则它将会回落到哑（Dumb）模式下（因此它可以对某些
+老的客户端实现向下兼容）
 
+smart HTTP 搭建服务器参考https://blog.csdn.net/zsq_519/article/details/51208879
+
+3.4 GitWeb || 协同开发 || 权限维护	
+
+	协同：
+		3.4.1 将合作者添加到项目下，实现项目共享
+		在git上点击设定值-合作者，将对方的用户名添加即可
+		
+		3.4.2 
+		方式：建立团队-将用户加入团队-设置团队的权限(整个团队)
+		操作：
+		备注：参考
+			建立一个新的组织 https://www.cnblogs.com/zhaoyanjun/p/5882784.html
+
+		3.4.3 GitLab(私有服务器) || GitWeb
 
 
 
