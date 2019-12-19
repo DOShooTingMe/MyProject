@@ -190,7 +190,10 @@ master: $ git pull origin master(拉取最新代码)
 
 三.服务器上的Git（20191212）
 3.1协议：Git协议、SSH协议、Http协议、本地协议(local)
-详细内容在 D:\zhazhazha\ProjectTest\MyProject\第三章-服务器上的Git\协议\协议分类
+内容位置： D:\zhazhazha\ProjectTest\MyProject\第三章-服务器上的Git\协议\协议分类
+内容概括：Git四大协议的介绍，优缺点分析；Git本地协议搭建示例、GitSSH协议搭建示例、Git SSH搭建本地生成Key；
+
+3.2在服务器上搭建 Git(20191216)
 
 	
 

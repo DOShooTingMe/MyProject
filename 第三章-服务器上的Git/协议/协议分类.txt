@@ -73,7 +73,12 @@ Git和http协议都是只读的
 	5.$ git clone https://github.com/DOShooTingMe/UserSSHProject.git (HTTP版本)
 	6.ls --> cd SSHUserProject
 	7.$ git add *    
-	7.$ git commit -a -m '创建master分支'
+	7.$ git commit -a -m '创建master分支';
+
+备注：
+C:\Users\Mr.Liu\.ssh 中的文件
+id_dsa 或 id_rsa 命名的文件，其中一个带有 .pub 扩展名。 .pub 文件是你的公钥，另
+一个则是私钥。
 
 
 参考：
