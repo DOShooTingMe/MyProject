@@ -211,15 +211,34 @@ smart HTTP 搭建服务器参考https://blog.csdn.net/zsq_519/article/details/51208879
 
 	协同：
 		3.4.1 将合作者添加到项目下，实现项目共享
-		在git上点击设定值-合作者，将对方的用户名添加即可
+		在git上点击设定值-合作者，将对方的用户名添加即可，
 		
 		3.4.2 
 		方式：建立团队-将用户加入团队-设置团队的权限(整个团队)
-		操作：
+		操作：仓库的设定值-合作者和团队-将自己新建立的团队加入-设置团队的权限
+		实践：参考 liuhaoDo/tempOrgFor/tempResFor
+			1.建立 liuhaoDo账户(@163.com)-tempOrgFor(组织)
+			2.建立tempResFor(仓库)
+			3.建立team，将协同人员加入到新的团队中，
+			4.在仓库中拉取新建的团队，将团队的权限设置一下。
 		备注：参考
 			建立一个新的组织 https://www.cnblogs.com/zhaoyanjun/p/5882784.html
 
 		3.4.3 GitLab(私有服务器) || GitWeb
+		无
+3.5第三方托管
+GitHub
+
+四章.分布式Git
+4.1
+4.2
+
+
+
+
+
+
+
 
 
 
