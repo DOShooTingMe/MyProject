@@ -10,9 +10,10 @@ git commit a:提交a文件，默认打开编辑器输入commit message
 git commit a -m 'message' :提交a文件
 git push a：推入a文件
 
-分支
+分支(赞)
 git branch develop:创建develop分支
-git checkout develop
+git checkout develop ：切换分支(切换本地)
+git checkout -b develop origin/develop ：切换远程分支
 git push origin develop：将本地develop分支推入
 git branch -D text:将本地text分支删除
 git push origin --delete text:删除远程分支
