@@ -49,6 +49,9 @@ git mv log1.txt log  = log:git add log1.txt;tomcat:git rm -f log1.txt;
 git log :会按提交历史时间排序，显示文件提交者、提交邮箱、提交说明显示所有提交历史；q退出
 git log -p :用来显示每次提交的内容差异 q退出
 git log -n :n为想要显示的个数； q退出（赞）
+
+git reflog :查看日志；(赞)
+
 git log --stat:选项在每次提交的下面列出所有被修改过的文件、有多少文件被修改了以及被修改过
 的文件的哪些行被移除或是添加了。 在每次提交的最后还有一个总结(不常用)
 git log --pretty:这个选项可以指定使用不同于默认格式的方式展示提交历史。(不常用)
@@ -262,7 +265,92 @@ smart HTTP 搭建服务器参考https://blog.csdn.net/zsq_519/article/details/51208879
 	引用：https://www.jianshu.com/p/b461fbf0ab6d
 5.3 管理组织
 
+--------------------------------------------------------end------------------------------------------
+六章.Git 工具
 
+6.1储藏与清理(卵用)
+	场景：当你在项目的一部分上已经工作一段时间后，所有东西都进入了混乱的状态，而这时你想要切换到另一个
+分支做一点别的事情。 问题是，你不想仅仅因为过会儿回到这一点而为做了一半的工作创建一次提交。 针对这
+个问题的答案是 git stash 命令。(为什么不再拉个分支呢)
+	操作：
+		$ git branch temp
+		$ git add *
+		$ git commit -a -m '准备temp分支，测试储藏'
+		$ git push origin temp
+
+		$ git checkout develop
+		$ vi today.txt(想切换分支，处理其他问题，但是又不值得提交)
+		$ git stash || git stash save 
+		$ git stash list(查看暂存列表)
+
+		$ git checkout temp
+		$ vi AAA.txt
+		$ git add * ;
+		$ git commit AAA.txt -m '提价文件，准备切换分支，处理之前的问题'
+		$ git push origin temp
+
+		$ git checkout develop
+		$ git stash list (查看列表，0是排在最新的)
+		stash@{0}: WIP on liuhao: 4a292f0 提交文件，测试储藏
+		stash@{1}: WIP on liuhao: 4a292f0 提交文件，测试储藏
+
+		$ git stash apply (不用版本号，默认取最近) || git stash apply stash@{2}(加版本号)
+	
+	删除：
+	$ git stash drop :删除最近的(list中0的)
+	$ git stash drop stash@{0} :删除特定
+
+	应用并删除：
+	$ git stash pop (也是运行最近的一个)
+
+	从储藏创建一个分支
+	$ git stash branch new(将储藏区中的修改新建分支提取出来，但是为什么原分支还是修改状态呢？？？？？？)
+
+
+	问题：
+	1.同一个文件进行操作
+	2.$ git stash list  同一个文件内，自己新建的各个分支共享；
+	3.在develop分支新建的stash在temp分支使用，造成冲突
+	4.stash list 一点不清晰，都不知道是哪个暂存进栈
+
+	总结：
+	1.stash list 不够清晰。同一个文件夹内，新建多个分支，多个分支还共享，共享一旦用错基本就冲突了
+
+6.2搜索
+	介绍：无论仓库里的代码量有多少，你经常需要查找一个函数是在哪里调用或者定义的，或者一个方法的变更历史。
+Git 提供了两个有用的工具来快速地从它的数据库中浏览代码和提交
+	6.2.1 Git Grep(卵用)
+
+		$ git grep 19
+
+		$ Git.txt:1.Binary file Git/GIt.pdf matches
+		SupplyReplenishServiceImpl.java:         * @date:2019年10月12日
+		SupplyReplenishServiceImpl.java:         * @date:2019年10月12日
+		SupplyReplenishServiceImpl.java:         * @date:2019年10月17日
+		SupplyReplenishServiceImpl.java:         * @date:2019年10月16日
+		SupplyReplenishServiceImpl.java:         * @date:2019年10月16日
+		SupplyReplenishServiceImpl.java:         * @date:2019年11月12日
+		SupplyReplenishServiceImpl.java:         * @date:2019年10月30日
+		SupplyReplenishServiceImpl.java:        * @date:2019年11月10日
+		SupplyReplenishServiceImpl.java:         * @date:2019年11月15日
+		SupplyReplenishServiceImpl.java:         * @date:2019年11月8日
+		SupplyReplenishServiceImpl.java:        * @date:2019年11月15日
+		SupplyReplenishServiceImpl.java:        * @date:2019年11月15日
+		SupplyReplenishServiceImpl.java:        * @date:2019年12月2日
+		SupplyReplenishServiceImpl.java:        * @date:2019年12月3日
+		SupplyReplenishServiceImpl.java:        * @date:2019年12月4日
+
+		
+	
+
+
+
+
+		$
+	
+6.1
+6.1
+6.1
 
 
 
