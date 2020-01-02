@@ -263,6 +263,12 @@ smart HTTP 搭建服务器参考https://blog.csdn.net/zsq_519/article/details/51208879
 		4.源代码使用者同意并将请求合并
 	备注：D:\zhazhazha\temp\forkProject 文件有案例
 	引用：https://www.jianshu.com/p/b461fbf0ab6d
+	可能遇到的错误：
+		打开GitHub中找到你自己派生过的项目，然后打开项目(注意地址：https://github.com/liuhaoDo/forkProject.git) 
+		在项目的Insights中：找到fork
+		点击进去进到自己的此项目中，然后进行上述操作；
+		否则，用(https://github.com/liuhaoDo/forkProject.git) 无权限建立分支、commit、push等操作
+		你自己的地址为(https://github.com/DOShooTingMe/forkProject.git)
 5.3 管理组织
 
 --------------------------------------------------------end------------------------------------------
@@ -340,17 +346,107 @@ Git 提供了两个有用的工具来快速地从它的数据库中浏览代码和提交
 		SupplyReplenishServiceImpl.java:        * @date:2019年12月3日
 		SupplyReplenishServiceImpl.java:        * @date:2019年12月4日
 
-		
+6.3 重置揭秘 -- 三棵树
+
+	 树				用途
+	HEAD			上一次提交的快照，下一次提交的父结点
+	Index			预期的下一次提交的快照
+	Working Directory	沙盒
+
+	工作流程
+	head		index		working directory
+
+					   1.txt
+	步骤一：现在我们想要提交这个文件，所以用 git add 来获取工作目录中的内容，并将其复制到索引中
+
+	head		index		working directory
+
+			 1.txt
+
+	步骤二：接着运行 git commit，它会取得索引中的内容并将它保存为一个永久的快照，然后创建一个指向该快照的提
+交对象，最后更新 master 来指向本次提交
+
+	(赞)
+	此时如果我们运行 git status，会发现没有任何改动，因为现在三棵树完全相同。//这也说明了git status -s 的工作原理
+
+	现在我们想要对文件进行修改然后提交它。 我们将会经历同样的过程；首先在工作目录中修改文件。 我们称其
+	为该文件的 v2 版本，并将它标记为红色。
+
+	reset 、checkout 都是用来操作者三棵树的
+	
+	运行 git checkout [branch] 与运行 git reset --hard [branch] 非常相似，它会更新所有三棵树使
+	其看起来像 [branch]，不过有两点重要的区别。
+
+	首先不同于 reset --hard，checkout 对工作目录是安全的，它会通过检查来确保不会将已更改的文件弄
+	丢。 其实它还更聪明一些。它会在工作目录中先试着简单合并一下，这样所有_还未修改过的_文件都会被更
+	新。 而 reset --hard 则会不做检查就全面地替换所有东西。
+	(赞)
+	第二个重要的区别是如何更新 HEAD。 reset 会移动 HEAD 分支的指向，而 checkout 只会移动 HEAD 自身来
+	指向另一个分支。	
+
+	例如，假设我们有 master 和 develop 分支，它们分别指向不同的提交；我们现在在 develop 上（所以
+	HEAD 指向它）。 如果我们运行 git reset master，那么 develop 自身现在会和 master 指向同一个提
+	交。 而如果我们运行 git checkout master 的话，develop 不会移动，HEAD 自身会移动。 现在 HEAD 将
+	会指向 master。
+
+	所以，虽然在这两种情况下我们都移动 HEAD 使其指向了提交 A，但_做法_是非常不同的。 reset 会移动
+	HEAD 分支的指向，而 checkout 则移动 HEAD 自身。
+
+6.4 revert (赞)(20200102)
+	概述：不用说 
+	操作：  $ git add 1.txt;
+		$ git commit -a -m'提交文件准备测试revert'
+		$ git revert HEAD ( 撤销前一次 commit和push)
+		输入commit内容
+	备注：  revert实际的作用是回滚，自己将上一次的提交删除，同时建立一次新的提交
+		reset 实际是删除。没有新的提交
+		感觉最好还是用revert。保留记录还是很好
+
+	操作：$ git revert HEAD id（6e1d253053dee9ca86e6ebd2f7dcb408181e6ecb||用git log -n 自己看也行）
 	
 
+6.5 Rerere
+	git rerere 功能是一个隐藏的功能。 正如它的名字 “reuse recorded resolution” 所指，它允许你让 Git 记
+住解决一个块冲突的方法，这样在下一次看到相同冲突时，Git 可以为你自动地解决它。
+	不做多介绍；亲力亲为
 
+6.6 Git调试
+	Git 也提供了两个工具来辅助你调试项目中的问题。 由于 Git 被设计成适用于几乎所有类型的项目，这些工具是
+比较通用的，但它们可以在出现问题的时候帮助你找到 bug 或者错误。
 
-
-		$
+	操作：$ git blame today.txt
+		$ git blame -L 12,22 today.txt (查看文件的 12 到 22 行)
+	效果：
+	$ git blame 1.txt
+		b8fa703a (liuhao7 2020-01-02 20:17:09 +0800 1) 1.第一次
+		b8fa703a (liuhao7 2020-01-02 20:17:09 +0800 2)
+		1710800b (liuhao7 2020-01-02 20:18:49 +0800 3) 2.第二次
+		1710800b (liuhao7 2020-01-02 20:18:49 +0800 4)
+		26c30973 (liuhao7 2020-01-02 20:27:16 +0800 5) 3.第三次
+		26c30973 (liuhao7 2020-01-02 20:27:16 +0800 6)
+		26c30973 (liuhao7 2020-01-02 20:27:16 +0800 7) 4.第四次
 	
-6.1
-6.1
-6.1
+6.7 Git打包
+	场景：虽然我们已经了解了网络传输 Git 数据的常用方法（如 HTTP，SSH 等），但还有另外一种不太常见却又十分有
+用的方式。
+	Git 可以将它的数据“打包”到一个文件中。 这在许多场景中都很有用。 有可能你的网络中断了，但你又希望将你的提交传给你的合作者们
+可能你不在办公网中并且出于安全考虑没有给你接入内网的权限。 可能你的无线、有线网卡坏掉了。 可能你现在没有共享服务器的权限，
+你又希望通过邮件将更新发送给别人，却不希望通过 format-patch 的方式传输 40 个提交。
+这些情况下 git bundle 就会很有用。 bundle 命令会将 git push 命令所传输的所有内容打包成一个二进制
+文件，你可以将这个文件通过邮件或者闪存传给其他人，然后解包到其他的仓库中。
+
+	操作：$ git bundle create today.bundle HEAD develop
+	显示：
+		Enumerating objects: 385, done.
+		Counting objects: 100% (385/385), done.
+		Delta compression using up to 8 threads
+		Compressing objects: 100% (313/313), done.
+		Writing objects: 100% (385/385), 7.29 MiB | 10.28 MiB/s, done.
+		Total 385 (delta 152), reused 0 (delta 0)
+		生成一个today.bundle的文件，将此文件传送给别人，别人打开即可
+
+	
+
 
 
 
