@@ -84,6 +84,8 @@ git remote rm newPB ：删除远程仓库newPB
 
 远程仓库的使用-clone(赞)
 git clone 命令会自动设置本地 master 分支跟踪克隆的远程仓库的 master 分支
+git clone -b develop  https://github.com/fsdfsfd/MyProject.git 指定分支的代码
+
 
 远程仓库的使用-pull(赞)
 git pull origin develop:poc  :将远程origin仓库 develop分支拉取到本地poc
