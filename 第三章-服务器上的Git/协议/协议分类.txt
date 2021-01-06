@@ -1,0 +1,99 @@
+1 本地协议：
+	1.在D盘符建立仓库：git init | git --bare init
+	2.git add *
+	3.$ git commit -a -m '建立私仓文件1'
+
+	4.切换E盘符||设置D盘符中的文件夹为网络共享文件夹和其他电脑交互
+	5.建立文件夹并拉取D盘符仓库内的文件：$ git clone /d/zhazhazha/GitLocalRep || $ git clone file:///d/zhazhazha/GitLocalRep
+	6.$ cd GitLocalRep
+	7.E盘符建立分支，修改文件(赞赞)
+		7.1$ git branch poc
+		7.1$ git checkout poc --修改文件--
+		7.1$ git add *
+		7.1$ git commit -a -m'在其他仓库修改文件内容'
+	8.提交文件，push文件
+		8.1$ 推送本地poc到远程仓库 
+		8.1$ git push origin poc
+	9.D盘符切换poc分支，更新内容，merge内容到master上
+		9.1$git branch 
+		9.2$ git branch checkout poc --检查是否提交仓库
+		9.3$ git branch checkout master
+		9.4$ git merge poc 
+	10.E盘符删除poc分支。结束此次修改
+	$ git branch -d poc
+	$ git push origin --delete poc
+
+出现的问题
+	1.在D盘符建立版本库的时候：命令的选择
+		1.1 $ git init (等同于可视化操作：git create rep. here)
+			|| git --bare init :有很多文件夹。。后续再看?????????????????????????
+	2.在E盘必须建立新分支poc才能继续工作，使用原有的develop/master 会出现一个错误，
+	该错误：[remote rejected] master -> master (branch is currently checked out)
+
+	该错误原因：
+	如果使用了git init初始化，则远程仓库的目录下，也包含work tree，
+	当本地仓库向远程仓库push时, 如果远程仓库正在push的分支上（如果当时不在push的分支，就没有问题）, 
+	那么push后的结果不会反应在work tree上,  也即在远程仓库的目录下对应的文件还是之前的内容。
+
+	错误解决方案：这是由于git默认拒绝了push操作，需要进行设置，修改.git/config文件后面添加如下代码：
+	[receive]
+	denyCurrentBranch = ignore
+
+	3.关于clone私仓的命令的区别
+		3.1$ git clone /d/zhazhazha/....
+		如果仅是指定路径，Git 会尝试使用硬链接（hard link）或直接复制所需要的文件。
+		3.2$ git clone file:///d/zhazhazha/...	
+		file://，Git 会触发平时用于网路传输资料的进程，那通常是传输效率较低的方法。
+--------------------------------------------本地协议end--------------------------------------------
+2 HTTP协议
+把Git的纯仓库文件放到HTTP的文件根目录下，配置一个特定的post-update 挂钩（hook) 就搞得定。
+优点：
+架设简单
+HTTPS提供只读的仓库。
+缺点：
+clone或者狭隘仓库内容可能会花费更多的时间
+
+
+--------------------------------------------HTTP协议end--------------------------------------------
+
+3 SSH协议
+优点：
+12SSH也是唯一一个同时便于读和写操作的网络协议；
+Git和http协议都是只读的
+2.通过SSh进行访问时安全的--所有的数据传输都是加密授权的；
+3.SSH很高效，会在传输之前尽可能的压缩数据
+缺点：
+1.ssh 
+
+实践操作：
+	1.git生成ssh key ：$ ssh-keygen -t  rsa -C"472246145@qq.com"(生成key)
+	2.一路回车到底 生成文件在指定目录中：C:\Users\Mr.Liu\.ssh中的
+	3.将文件 id_rsa.pub 中的内容复制到 Git-Hub中(account-ssh-new-title-key，钥匙在本地，需要在远程仓库设置用此钥匙开锁的门)
+	4.$ git clone git@github.com:DOShooTingMe/UserSSHProject.git (SSH版本)
+	5.$ git clone https://github.com/DOShooTingMe/UserSSHProject.git (HTTP版本)
+	6.ls --> cd SSHUserProject
+	7.$ git add *    
+	7.$ git commit -a -m '创建master分支';
+
+备注：
+C:\Users\Mr.Liu\.ssh 中的文件
+id_dsa 或 id_rsa 命名的文件，其中一个带有 .pub 扩展名。 .pub 文件是你的公钥，另
+一个则是私钥。
+
+
+参考：
+https://blog.csdn.net/qq_17011423/article/details/97243286
+--------------------------------------------SSH协议end--------------------------------------------
+4 Git协议
+优点：
+1.传输最快；
+缺点：
+缺少授权机制。
+一般做法是，同时提供 SSH 接口，让几个开发者拥有推送（写）权限，其他人通过git:// 拥有只读权限。 
+同时该协议还要求防火墙开放9418端口；
+
+--------------------------------------------Git协议end--------------------------------------------
+网址参考：https://blog.csdn.net/sinat_32366329/article/details/102750970
+
+
+

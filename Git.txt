@@ -1,223 +1,580 @@
 Git
-һ.Git������
-1.1�������
-git branch :�鿴���ط�֧
-git branch -a :�鿴ȫ����֧
-git branch -r :�鿴Զ�̷�֧
+一.Git基础：
+1.1基础命令：
+git branch :查看本地分支
+git branch -a :查看全部分支
+git branch -r :查看远程分支
 
-git pull ����ȡ
-git commit a:�ύa�ļ���Ĭ�ϴ򿪱༭������commit message
-git commit a -m 'message' :�ύa�ļ�
-git push a������a�ļ�
+git pull ：拉取
+git commit a:提交a文件，默认打开编辑器输入commit message
+git commit a -m 'message' :提交a文件
+git push a：推入a文件
 
-��֧
-git branch develop:����develop��֧
-git checkout develop
-git push origin develop��������develop��֧����
-git branch -D text:������text��֧ɾ��
-git push origin --delete text:ɾ��Զ�̷�֧
+分支(赞)
+git branch develop:创建develop分支
+git checkout develop ：切换分支(切换本地)
+git checkout -b develop origin/develop ：切换远程分支
+git push origin develop：将本地develop分支推入
+git branch -D text:将本地text分支删除
+git push origin --delete text:删除远程分支
 
-�ļ�����
-git add A :��A�ļ��ŵ��ݴ���
-git add * :��ȫ���ļ��ŵ��ݴ���
+文件添加
+git add A :将A文件放到暂存区
+git add * :将全部文件放到暂存区
 
-�ļ�״̬��ѯ
-git status :�鿴�ļ���״̬��
-git status -s:�鿴�ļ���״̬�����ԣ�
-git diff --cached:�鿴���ݴ�Ľ�Ҫ���ӵ��´��ύ�������
-(��ע�����޸ĵ��ļ�������ص�diff�У�ֻ���ݴ滺�����ĲŻ���ʾ)
-git diff --staged:����ͬ��
+文件状态查询
+git status :查看文件的状态；
+git status -s:查看文件的状态（缩略）
+git diff --cached:查看已暂存的将要添加的下次提交里的内容
+(备注：刚修改的文件不会加载到diff中，只有暂存缓存区的才会显示)
+git diff --staged:功能同上
 
-�ļ��ύ
-git commit A -m ''�ֶ�д�ύ����
-git commit A �ı��༭��д�ύ����
-git commit -a -m '�ύ����' :���ݴ����������ύ�������
+文件提交
+git commit A -m ''手动写提交内容
+git commit A 文本编辑器写提交内容
+git commit -a -m '提交内容' :将暂存区的内容提交（多个）
 
-�ļ�ɾ��
-git rm delete.txt :�Ƴ��ļ�
-log(���ļ�����):git rm *.log ��ɾ������log��׺���ļ�
-tomcat(���ļ�����):git rm log/*.log :ɾ������log��׺���ļ�������Ҫ��ת���ַ���
-git rm -r log:ɾ�������ļ��У�
-git rm -rf log:ǿ��ɾ�������ļ��У�
+文件删除
+git rm delete.txt :移除文件
+log(改文件夹下):git rm *.log ：删除所有log后缀的文件
+tomcat(该文件夹下):git rm log/*.log :删除所有log后缀的文件（不需要加转移字符）
+git rm -r log:删除整个文件夹；
+git rm -rf log:强力删除整个文件夹；
 
-�ļ��ƶ�
-git mv source destination:��source�ļ��ƶ���destination�ļ�����
+文件移动
+git mv source destination:将source文件移动到destination文件夹中
 git mv log1.txt log  = log:git add log1.txt;tomcat:git rm -f log1.txt;
 
-�鿴�ύ��ʷ
-git log :�ᰴ�ύ��ʷʱ��������ʾ�ļ��ύ�ߡ��ύ���䡢�ύ˵����ʾ�����ύ��ʷ��q�˳�
-git log -p :������ʾÿ���ύ�����ݲ��� q�˳�
-git log -n :nΪ��Ҫ��ʾ�ĸ����� q�˳����ޣ�
-git log --stat:ѡ����ÿ���ύ�������г����б��޸Ĺ����ļ����ж����ļ����޸����Լ����޸Ĺ�
-���ļ�����Щ�б��Ƴ����������ˡ� ��ÿ���ύ�������һ���ܽ�(������)
-git log --pretty:���ѡ�����ָ��ʹ�ò�ͬ��Ĭ�ϸ�ʽ�ķ�ʽչʾ�ύ��ʷ��(������)
+查看提交历史
+git log :会按提交历史时间排序，显示文件提交者、提交邮箱、提交说明显示所有提交历史；q退出
+git log -p :用来显示每次提交的内容差异 q退出
+git log -n :n为想要显示的个数； q退出（赞）
 
-�������ޣ�
-git commit --amend :�����ϴ��ύ������������½��ļ����뻺�����������ύcommit����
+git reflog :查看日志；(赞)
 
-ȡ���ݴ���ļ���Σ�գ������ã�
-git reset head 1.txt����1.txt�Ƴ��ݴ���
+git log --stat:选项在每次提交的下面列出所有被修改过的文件、有多少文件被修改了以及被修改过
+的文件的哪些行被移除或是添加了。 在每次提交的最后还有一个总结(不常用)
+git log --pretty:这个选项可以指定使用不同于默认格式的方式展示提交历史。(不常用)
 
-�������ļ����޸ģ��ޣ�
-git checkout -- [file]ɾ�����ļ�������
+撤销（赞）
+git commit --amend :撤销上次提交操作，这次重新将文件加入缓存区并重新提交commit内容
 
-1.2Զ�ֿ̲��ʹ�ã�20191204 - 20191205��
-Զ�ֿ̲��ʹ��-�鿴
-git remote ���鿴���Ѿ����õ�Զ�ֿ̲������
-git remote -v : ����ʾ��Ҫ��дԶ�ֿ̲�ʹ�õ� Git ����ļ�д�����Ӧ�� URL���ޣ�
+取消暂存的文件（危险）（卵用）
+git reset head 1.txt：将1.txt移除暂存区
 
-Զ�ֿ̲��ʹ��-����
-git remote add newPB https://github.com/fsdfsfd/Test.git :����һ���µ�Զ�� Git �ֿ���Ϊ��newPB
-��ע������pull��ʱ����Ҫָ������Ҫ�Ĳֿ���pull
+撤消对文件的修改（赞）
+git checkout -- [file]删除的文件就算了
 
-Զ�ֿ̲��ʹ��-������
-git remote rename newPB newPBB �����½����Ĳֿ�newPB����ΪnewPBB
+1.2远程仓库的使用（20191204 - 20191205）
+远程仓库的使用-查看
+git remote ：查看你已经配置的远程仓库服务器
+git remote -v : 会显示需要读写远程仓库使用的 Git 保存的简写与其对应的 URL（赞）
 
-Զ�ֿ̲��ʹ��-ɾ��
-git remote remove newPB ��ɾ��Զ�ֿ̲�newPB
-git remote rm newPB ��ɾ��Զ�ֿ̲�newPB
+远程仓库的使用-创建
+git remote add newPB https://github.com/fsdfsfd/Test.git :添加一个新的远程 Git 仓库名为：newPB
+备注：当你pull的时候，需要指定你需要的仓库来pull
+
+远程仓库的使用-重命名
+git remote rename newPB newPBB ：将新建立的仓库newPB更改为newPBB
+
+远程仓库的使用-删除
+git remote remove newPB ：删除远程仓库newPB
+git remote rm newPB ：删除远程仓库newPB
 
 
-Զ�ֿ̲��ʹ��-clone(��)
-git clone ������Զ����ñ��� master ��֧���ٿ�¡��Զ�ֿ̲�� master ��֧
+远程仓库的使用-clone(赞)
+git clone 命令会自动设置本地 master 分支跟踪克隆的远程仓库的 master 分支
 
-Զ�ֿ̲��ʹ��-pull(��)
-git pull origin develop:poc  :��Զ��origin�ֿ� develop��֧��ȡ������poc
-git pull origin develop      :��Զ��origin�ֿ� develop��֧��ȡ�����ص�ǰ��֧
-git pull����ǰ��֧�Զ���Ψһһ��׷�ٷ�֧���кϲ�(�����˰���Ҳ����)
+远程仓库的使用-pull(赞)
+git pull origin develop:poc  :将远程origin仓库 develop分支拉取到本地poc
+git pull origin develop      :将远程origin仓库 develop分支拉取到本地当前分支
+git pull：当前分支自动与唯一一个追踪分支进行合并(我试了半天也不行)
 
-Զ�ֿ̲��ʹ��-push(��)
-git push origin develop :���˴��޸�pushԶ�ֿ̲�
+远程仓库的使用-push(赞)
+git push origin develop :将此次修改push远程仓库
 
-�鿴ĳ��Զ�ֿ̲�(����)
+查看某个远程仓库(卵用)
 git remote show [remote-name]
 
-1.3���ǩ
-���ܣ�Git ���Ը���ʷ�е�ĳһ���ύ���ϱ�ǩ����ʾ��Ҫ���Ƚ��д����Ե������ǻ�ʹ�������������Ƿ�����㣨v1.0 �ȵȣ��� 
-˵����Git�����ֱ�ǩ��������ǩ��lightweight���븽ע��ǩ��annotated��
-	1.3.1������ǩ����һ������ı�ķ�֧������ֻ��һ���ض��ύ�����ã�
-	1.3.2��ע��ǩ�Ǵ洢�� Git ���ݿ��е�һ���������� �����ǿ��Ա�У��ģ����а������ǩ�ߵ����֡�����
-	     �ʼ���ַ������ʱ�䣻����һ����ǩ��Ϣ�����ҿ���ʹ�� GNU Privacy Guard ��GPG��ǩ������֤�� ͨ������
-	     ������ע��ǩ��
+1.3打标签
+介绍：Git 可以给历史中的某一个提交打上标签，以示重要。比较有代表性的是人们会使用这个功能来标记发布结点（v1.0 等等）。 
+说明：Git有两种标签；轻量标签（lightweight）与附注标签（annotated）
+	1.3.1轻量标签很像一个不会改变的分支——它只是一个特定提交的引用；
+	1.3.2附注标签是存储在 Git 数据库中的一个完整对象。 它们是可以被校验的；其中包含打标签者的名字、电子
+	     邮件地址、日期时间；还有一个标签信息；并且可以使用 GNU Privacy Guard （GPG）签名与验证。 通常建议
+	     创建附注标签，
 
 
-������ǩ(��ע)
-git tag -a v1.0 -m '' :����һ�� v1.0�ı�ǩ��-m����˵
-git tag v2.1 -m '';(��)
-������ǩ(����)
+创建标签(附注)
+git tag -a v1.0 -m '' :创建一个 v1.0的标签；-m不多说
+git tag v2.1 -m '';(赞)
+创建标签(轻量)
 git tag v2.0;
 
-�鿴��ǩ
-git tag:�鿴���б�ǩ
-git show v1.0 :�鿴v1.0��ǩ����ϸ����(��)
-git tag -l 'v1.*' :��ʾ�����Ա�ǩv1.����ģ����ѯ�ı�ǩ��
+查看标签
+git tag:查看所有标签
+git show v1.0 :查看v1.0标签的详细内容(赞)
+git tag -l 'v1.*' :显示所有以标签v1.进行模糊查询的标签；
 
-�г���ǩ
-git tag ��
-git tag -l 'v1.8.5*'�� ֻ�� 1.8.5 �ı�ǩ��������
+列出标签
+git tag ：
+git tag -l 'v1.8.5*'： 只对 1.8.5 的标签进行搜索
 
 
-������ǩ
-git push origin tag v5.0 :��v5.0��ǩ�������ֿ�
-git push origin --tags :һ�������ͺܶ��ǩ��Ҳ����ʹ�ô��� --tags ѡ��� git push ����
+共享标签
+git push origin tag v5.0 :将v5.0标签共享到仓库
+git push origin --tags :一次性推送很多标签，也可以使用带有 --tags 选项的 git push 命令
 
-ɾ����ǩ
-git tag -d v1.0 :ɾ��v1.0��ǩ
+删除标签
+git tag -d v1.0 :删除v1.0标签
 
-1.4Git������20191206�������ã�
+1.4Git别名（20191206）（卵用）
 $ git config --global alias.ci commit
 $ git add A
 $ git commit -a -m '' == $ git ci -a -m ''
+--------------------------------------------------------end------------------------------------------
+二.Git分支：
+2.1分支介绍
 
-��.Git��֧��
-2.1��֧����
+2.2分支创建
 
-2.2��֧����
+2.3分支管理
+git branch -v	：每一个分支的最后一次提交
+git branch -vv ：查看设置的所有跟踪分支
+git branch --merged ：查看哪些分支已经合并到当前分支（卵用）
 
-2.3��֧����
-git branch -v	��ÿһ����֧�����һ���ύ
-git branch -vv ���鿴���õ����и��ٷ�֧
-git branch --merged ���鿴��Щ��֧�Ѿ��ϲ�����ǰ��֧�����ã�
+2.4分支开发工作流
+许多使用 Git 的开发者都喜欢使用这种方式来工作，比如只在 master 分支上保留完全稳定的代码——有可能仅
+仅是已经发布或即将发布的代码。 他们还有一些名为 develop 或者 next 的平行分支，被用来做后续开发或者
+测试稳定性——这些分支不必保持绝对稳定，但是一旦达到稳定状态，它们就可以被合并入 master 分支了。 这
+样，在确保这些已完成的特性分支（短期分支，比如之前的 iss53 分支）能够通过所有测试，并且不会引入更
+多 bug 之后，就可以合并入主干分支中，等待下一次的发布。
 
-2.4��֧����������
-����ʹ�� Git �Ŀ����߶�ϲ��ʹ�����ַ�ʽ������������ֻ�� master ��֧�ϱ�����ȫ�ȶ��Ĵ��롪���п��ܽ�
-�����Ѿ������򼴽������Ĵ��롣 ���ǻ���һЩ��Ϊ develop ���� next ��ƽ�з�֧����������������������
-�����ȶ��ԡ�����Щ��֧���ر��־����ȶ�������һ���ﵽ�ȶ�״̬�����ǾͿ��Ա��ϲ��� master ��֧�ˡ� ��
-������ȷ����Щ����ɵ����Է�֧�����ڷ�֧������֮ǰ�� iss53 ��֧���ܹ�ͨ�����в��ԣ����Ҳ��������
-�� bug ֮�󣬾Ϳ��Ժϲ������ɷ�֧�У��ȴ���һ�εķ�����
+2.5远程分支
+merge 这里不做解释了。用可视化来merge；
 
-2.5Զ�̷�֧
-merge ���ﲻ�������ˡ��ÿ��ӻ���merge��
+如何避免每次输入密码
+如果你正在使用 HTTPS URL 来推送，Git 服务器会询问用户名与密码。 默认情况下它会在终端
+中提示服务器是否允许你进行推送。
 
-��α���ÿ����������
-���������ʹ�� HTTPS URL �����ͣ�Git ��������ѯ���û��������롣 Ĭ��������������ն�
-����ʾ�������Ƿ�������������͡�
+想要了解更多关于不同验证缓存的可用选项，查看 凭证存储（window-控制面板-）
 
-��Ҫ�˽������ڲ�ͬ��֤����Ŀ���ѡ��鿴 ƾ֤�洢��window-�������-��
+2.6变基(赞)(20191207)
+在 Git 中整合来自不同分支的修改主要有两种方法：merge 以及 rebase
 
-2.6���
-�� Git ���������Բ�ͬ��֧���޸���Ҫ�����ַ�����merge �Լ� rebase
+merge说明(赞赞)
+	1.可视化的merge不做过多说明
+	2.命令版本的merge；
+develop:$ git branch
+	* develop
+	$ add 123.txt 
+	$ git commit -a -m '新增变基文件3'
+	$ git push origin develop
+	$ git branch master | git checkout master 
+master: $ git pull origin master(拉取最新代码)
+	$ git merge develop
+	$ git push origin master(看远程仓库master分支已经有内容了)
+	$ git checkout develop
+	$ git branch -d master 
+总结：merge都是在一条分支下进行的
+命令版本的merge和可视化的merge一样；
+要被merge的文件为石；等到merge的文件为基
+问题：感觉不在统一个文件下创建master分支，直接merge  origin/master可以吗？？
+	
+
+总结：
+变基的风险
+呃，奇妙的变基也并非完美无缺，要用它得遵守一条准则：
+不要对在你的仓库外有副本的分支执行变基。
+如果你遵循这条金科玉律，就不会出差错。 否则，人民群众会仇恨你，你的朋友和家人也会嘲笑你，唾弃你。
+变基操作的实质是丢弃一些现有的提交，然后相应地新建一些内容一样但实际上不同的提交。 如果你已经将提
+交推送至某个仓库，而其他人也已经从该仓库拉取提交并进行了后续工作，此时，如果你用 git rebase 命令
+重新整理了提交并再次推送，你的同伴因此将不得不再次将他们手头的工作与你的提交进行整合，如果接下来你
+还要拉取并整合他们修改过的提交，事情就会变得一团糟。
+
+--------------------------------------------------------end------------------------------------------
+
+三.服务器上的Git（20191212）
+3.1协议：Git协议、SSH协议、Http协议、本地协议(local)
+内容位置： D:\zhazhazha\ProjectTest\MyProject\第三章-服务器上的Git\协议\协议分类
+内容概括：Git四大协议的介绍，优缺点分析；Git本地协议搭建示例、GitSSH协议搭建示例、Git SSH搭建本地生成Key；
+
+3.2在服务器上搭建 Git(20191216)
+无。
+
+3.3Smart HTTP(20191219)
+一般情况下SSH支持授权访问，HTTP进行无授权访问。
+Smart HTTP结合两种；
+设置 Smart HTTP 一般只需要在服务器上启用一个 Git 自带的名为 git-http-backend 的 CGI 脚
+本。 该 CGI 脚本将会读取由 git fetch 或 git push 命令向 HTTP URL 发送的请求路径和头部信息，来判断
+该客户端是否支持 HTTP 通信（不低于 1.6.6 版本的客户端支持此特性）。 如果 CGI 发现该客户端支持智能
+（Smart）模式，它将会以智能模式与它进行通信，否则它将会回落到哑（Dumb）模式下（因此它可以对某些
+老的客户端实现向下兼容）
+
+smart HTTP 搭建服务器参考https://blog.csdn.net/zsq_519/article/details/51208879
+
+3.4 GitWeb || 协同开发 || 权限维护	
+
+	协同：
+		3.4.1 共享协同(合作者方式)
+		描述：协同1
+		操作：将合作者添加到项目下，实现项目共享，在git上点击设定值-合作者，将对方的用户名添加即可，
+		备注：
+		引用：
+		
+		3.4.2  团队协同(team方式)
+		描述：协同2
+		方式：建立团队-将用户加入团队-设置团队的权限(整个团队)
+		操作：仓库的设定值-合作者和团队-将自己新建立的团队加入-设置团队的权限
+		实践：参考 liuhaoDo/tempOrgFor/tempResFor
+			1.建立 liuhaoDo账户(@163.com)-tempOrgFor(组织)
+			2.建立tempResFor(仓库)
+			3.建立team，将协同人员加入到新的团队中，
+			4.在仓库中拉取新建的团队，将团队的权限设置一下。
+		备注：
+		引用：参考建立一个新的组织 https://www.cnblogs.com/zhaoyanjun/p/5882784.html
+
+		3.4.3 GitLab(私有服务器) || GitWeb
+		描述：无
+
+		3.4.4 派生
+		描述：派生-后面介绍(属于协同 5.2 派生)
+3.5第三方托管
+	GitHub
+--------------------------------------------------------end------------------------------------------
+
+四章.分布式Git
+无
+
+--------------------------------------------------------end------------------------------------------
+
+五章.GitHub
+
+5.1GitHub
+	a.两步验证
+	简称2FA。
+	你可以在 Account settings 页面的 Security 标签页中找到 Two-factor Authentication 设置。
+
+5.2 派生(可以放置到3.4章节的协同)
+	介绍：参与其他的开源项目的设计，没有任何权限在源代码上面进行修改和push，采用“派生”的方式。
+	操作：  1.找一个项目，发起派生，将此工程放置到自己对应的方库中
+		2.clone代码-branch分支-修改文件-add文件-commit文件-push文件
+		3.推送到派生的项目副本中，同样还可以创建合并请求，将修改推送到项目源版本库中，
+		4.源代码使用者同意并将请求合并
+	备注：D:\zhazhazha\temp\forkProject 文件有案例
+	引用：https://www.jianshu.com/p/b461fbf0ab6d
+	可能遇到的错误：
+		打开GitHub中找到你自己派生过的项目，然后打开项目(注意地址：https://github.com/liuhaoDo/forkProject.git) 
+		在项目的Insights中：找到fork
+		点击进去进到自己的此项目中，然后进行上述操作；
+		否则，用(https://github.com/liuhaoDo/forkProject.git) 无权限建立分支、commit、push等操作
+		你自己的地址为(https://github.com/DOShooTingMe/forkProject.git)
+5.3 管理组织
+
+--------------------------------------------------------end------------------------------------------
+六章.Git 工具
+
+6.1储藏与清理(卵用)
+	场景：当你在项目的一部分上已经工作一段时间后，所有东西都进入了混乱的状态，而这时你想要切换到另一个
+分支做一点别的事情。 问题是，你不想仅仅因为过会儿回到这一点而为做了一半的工作创建一次提交。 针对这
+个问题的答案是 git stash 命令。(为什么不再拉个分支呢)
+	操作：
+		$ git branch temp
+		$ git add *
+		$ git commit -a -m '准备temp分支，测试储藏'
+		$ git push origin temp
+
+		$ git checkout develop
+		$ vi today.txt(想切换分支，处理其他问题，但是又不值得提交)
+		$ git stash || git stash save 
+		$ git stash list(查看暂存列表)
+
+		$ git checkout temp
+		$ vi AAA.txt
+		$ git add * ;
+		$ git commit AAA.txt -m '提价文件，准备切换分支，处理之前的问题'
+		$ git push origin temp
+
+		$ git checkout develop
+		$ git stash list (查看列表，0是排在最新的)
+		stash@{0}: WIP on liuhao: 4a292f0 提交文件，测试储藏
+		stash@{1}: WIP on liuhao: 4a292f0 提交文件，测试储藏
+
+		$ git stash apply (不用版本号，默认取最近) || git stash apply stash@{2}(加版本号)
+	
+	删除：
+	$ git stash drop :删除最近的(list中0的)
+	$ git stash drop stash@{0} :删除特定
+
+	应用并删除：
+	$ git stash pop (也是运行最近的一个)
+
+	从储藏创建一个分支
+	$ git stash branch new(将储藏区中的修改新建分支提取出来，但是为什么原分支还是修改状态呢？？？？？？)
+
+
+	问题：
+	1.同一个文件进行操作
+	2.$ git stash list  同一个文件内，自己新建的各个分支共享；
+	3.在develop分支新建的stash在temp分支使用，造成冲突
+	4.stash list 一点不清晰，都不知道是哪个暂存进栈
+
+	总结：
+	1.stash list 不够清晰。同一个文件夹内，新建多个分支，多个分支还共享，共享一旦用错基本就冲突了
+
+6.2搜索
+	介绍：无论仓库里的代码量有多少，你经常需要查找一个函数是在哪里调用或者定义的，或者一个方法的变更历史。
+Git 提供了两个有用的工具来快速地从它的数据库中浏览代码和提交
+	6.2.1 Git Grep(卵用)
+
+		$ git grep 19
+
+		$ Git.txt:1.Binary file Git/GIt.pdf matches
+		SupplyReplenishServiceImpl.java:         * @date:2019年10月12日
+		SupplyReplenishServiceImpl.java:         * @date:2019年10月12日
+		SupplyReplenishServiceImpl.java:         * @date:2019年10月17日
+		SupplyReplenishServiceImpl.java:         * @date:2019年10月16日
+		SupplyReplenishServiceImpl.java:         * @date:2019年10月16日
+		SupplyReplenishServiceImpl.java:         * @date:2019年11月12日
+		SupplyReplenishServiceImpl.java:         * @date:2019年10月30日
+		SupplyReplenishServiceImpl.java:        * @date:2019年11月10日
+		SupplyReplenishServiceImpl.java:         * @date:2019年11月15日
+		SupplyReplenishServiceImpl.java:         * @date:2019年11月8日
+		SupplyReplenishServiceImpl.java:        * @date:2019年11月15日
+		SupplyReplenishServiceImpl.java:        * @date:2019年11月15日
+		SupplyReplenishServiceImpl.java:        * @date:2019年12月2日
+		SupplyReplenishServiceImpl.java:        * @date:2019年12月3日
+		SupplyReplenishServiceImpl.java:        * @date:2019年12月4日
+
+6.3 重置揭秘 -- 三棵树
+
+	 树				用途
+	HEAD			上一次提交的快照，下一次提交的父结点
+	Index			预期的下一次提交的快照
+	Working Directory	沙盒
+
+	工作流程
+	head		index		working directory
+
+					   1.txt
+	步骤一：现在我们想要提交这个文件，所以用 git add 来获取工作目录中的内容，并将其复制到索引中
+
+	head		index		working directory
+
+			 1.txt
+
+	步骤二：接着运行 git commit，它会取得索引中的内容并将它保存为一个永久的快照，然后创建一个指向该快照的提
+交对象，最后更新 master 来指向本次提交
+
+	(赞)
+	此时如果我们运行 git status，会发现没有任何改动，因为现在三棵树完全相同。//这也说明了git status -s 的工作原理
+
+	现在我们想要对文件进行修改然后提交它。 我们将会经历同样的过程；首先在工作目录中修改文件。 我们称其
+	为该文件的 v2 版本，并将它标记为红色。
+
+	reset 、checkout 都是用来操作者三棵树的
+	
+	运行 git checkout [branch] 与运行 git reset --hard [branch] 非常相似，它会更新所有三棵树使
+	其看起来像 [branch]，不过有两点重要的区别。
+
+	首先不同于 reset --hard，checkout 对工作目录是安全的，它会通过检查来确保不会将已更改的文件弄
+	丢。 其实它还更聪明一些。它会在工作目录中先试着简单合并一下，这样所有_还未修改过的_文件都会被更
+	新。 而 reset --hard 则会不做检查就全面地替换所有东西。
+	(赞)
+	第二个重要的区别是如何更新 HEAD。 reset 会移动 HEAD 分支的指向，而 checkout 只会移动 HEAD 自身来
+	指向另一个分支。	
+
+	例如，假设我们有 master 和 develop 分支，它们分别指向不同的提交；我们现在在 develop 上（所以
+	HEAD 指向它）。 如果我们运行 git reset master，那么 develop 自身现在会和 master 指向同一个提
+	交。 而如果我们运行 git checkout master 的话，develop 不会移动，HEAD 自身会移动。 现在 HEAD 将
+	会指向 master。
+
+	所以，虽然在这两种情况下我们都移动 HEAD 使其指向了提交 A，但_做法_是非常不同的。 reset 会移动
+	HEAD 分支的指向，而 checkout 则移动 HEAD 自身。
+
+6.4 revert (赞)(20200102)
+	概述：不用说 
+	操作：  $ git add 1.txt;
+		$ git commit -a -m'提交文件准备测试revert'
+		$ git revert HEAD ( 撤销前一次 commit和push)
+		输入commit内容
+	备注：  revert实际的作用是回滚，自己将上一次的提交删除，同时建立一次新的提交
+		reset 实际是删除。没有新的提交
+		感觉最好还是用revert。保留记录还是很好
+
+	操作：$ git revert HEAD id（6e1d253053dee9ca86e6ebd2f7dcb408181e6ecb||用git log -n 自己看也行）
+	
+
+6.5 Rerere
+	git rerere 功能是一个隐藏的功能。 正如它的名字 “reuse recorded resolution” 所指，它允许你让 Git 记
+住解决一个块冲突的方法，这样在下一次看到相同冲突时，Git 可以为你自动地解决它。
+	不做多介绍；亲力亲为
+
+6.6 Git调试
+	Git 也提供了两个工具来辅助你调试项目中的问题。 由于 Git 被设计成适用于几乎所有类型的项目，这些工具是
+比较通用的，但它们可以在出现问题的时候帮助你找到 bug 或者错误。
+
+	操作：$ git blame today.txt
+		$ git blame -L 12,22 today.txt (查看文件的 12 到 22 行)
+	效果：
+	$ git blame 1.txt
+		b8fa703a (liuhao7 2020-01-02 20:17:09 +0800 1) 1.第一次
+		b8fa703a (liuhao7 2020-01-02 20:17:09 +0800 2)
+		1710800b (liuhao7 2020-01-02 20:18:49 +0800 3) 2.第二次
+		1710800b (liuhao7 2020-01-02 20:18:49 +0800 4)
+		26c30973 (liuhao7 2020-01-02 20:27:16 +0800 5) 3.第三次
+		26c30973 (liuhao7 2020-01-02 20:27:16 +0800 6)
+		26c30973 (liuhao7 2020-01-02 20:27:16 +0800 7) 4.第四次
+	
+6.7 Git打包
+	场景：
+	1.虽然我们已经了解了网络传输 Git 数据的常用方法（如 HTTP，SSH 等），但还有另外一种不太常见却又十分有用的方式。
+	2.如果你想把这个仓库发送给其他人但你没有其他仓库的权限，或者就是懒得新建一个仓库
+	3.如果条件允许，可以考虑git的本地协议，利用局域网互传，在宿主机建立仓库，这样也行。
+
+	原理： 
+	bundle 命令会将 git push 命令所传输的所有内容打包成一个二进制文件，你可以将这个文件通过邮件或者闪存传给其他人，
+	然后解包到其他的仓库中。
+
+	操作：
+	将文件提交到本地仓库
+	$ git bundle create repo.bundle HEAD develop (加上develop分支)
+	本地生成repo.bundle 文件，将文件发送给别人
+	例如：
+	$ git bundle create today.bundle HEAD develop
+	显示：
+		Enumerating objects: 385, done.
+		Counting objects: 100% (385/385), done.
+		Delta compression using up to 8 threads
+		Compressing objects: 100% (313/313), done.
+		Writing objects: 100% (385/385), 7.29 MiB | 10.28 MiB/s, done.
+		Total 385 (delta 152), reused 0 (delta 0)
+		生成一个today.bundle的文件，将此文件传送给别人，别人打开即可
+
+	检查：
+	$ git bundle verify today.bundle
+	today.bundle is okay
+	The bundle contains this ref:
+	740f63c43c793665d54e5d8ee86f613d1473d97f HEAD
+	The bundle records a complete history.
+	
+	备注：
+	1.在使用 bundle 命令时，可以打包的引用或者提交的区间。 
+	2.如果你在打包时没有包含 HEAD 引用，会很麻烦。Git 不知道应该检出哪一个分支。所以一定加上HEAD指向。别说后续别人clone的时候会想办法，你先弄好比啥都强。
+	4.能不能只打包修改部分(没实践)
+
+	问题：在别的仓库生成的文件，复制之后 利用clone repo.bundle生成一个一模一样的库，这个库要干啥
+		回答：别人在拿到文件之后，可以将
+	引用：https://www.jianshu.com/p/eebe5dc8ee91
+		https://bingohuang.gitbooks.io/progit2/content/07-git-tools/sections/bundling.html
+	
+
+6.7 Git替换(不想说)
+
+6.8 凭证存储(介绍一下)
+
+	如果你使用的是 SSH 方式连接远端，并且设置了一个没有口令的密钥，这样就可以在不输入用户名和密码的情况下安全地传输数据。 然而这对 HTTP 协议来说是不可能的 —— 每一个连接都是需要用户名和密码的。 这在使用双重认证的情况下会更麻烦，因为你需要输入一个随机生成并且毫无规律的 token 作为密码。
+幸运的是，Git 拥有一个凭证系统来处理这个事情。 下面有一些 Git 的选项：
+• 默认所有都不缓存。 每一次连接都会询问你的用户名和密码。
+• “cache” 模式会将凭证存放在内存中一段时间。 密码永远不会被存储在磁盘中，并且在15分钟后从内存
+中清除。
+• “store” 模式会将凭证用明文的形式存放在磁盘中，并且永不过期。 这意味着除非你修改了你在 Git 服务
+器上的密码，否则你永远不需要再次输入你的凭证信息。 这种方式的缺点是你的密码是用明文的方式存放
+在你的 home 目录下。
+• 如果你使用的是 Mac，Git 还有一种 “osxkeychain” 模式，它会将凭证缓存到你系统用户的钥匙串中。
+这种方式将凭证存放在磁盘中，并且永不过期，但是是被加密的，这种加密方式与存放 HTTPS 凭证以及
+Safari 的自动填写是相同的。
+• 如果你使用的是 Windows，你可以安装一个叫做 “winstore” 的辅助工具。 这和上面说的
+“osxkeychain” 十分类似，但是是使用 Windows Credential Store 来控制敏感信息。 
+
+--------------------------------------------------------end------------------------------------------
+七章.自定义Git
+
+八章................
+
+到此 学习了Git的所有东西
+
+开启新的学习之路
+	
 
 
 
 
 
-1.2����
-1.2.1���֣�fatal:Not a valid object name:'master'
-ԭ����û���ύһ������Ҫ��commit֮��Ż���������master��֧����ʱ�ſ��Խ���������֧��
-1.2.2ִ�����²�����
-	1.��ԭ�ȵ��ļ������޸ģ�
-	2.δ�����ݴ���ֱ��ִ�� git rm -f (git rm:�Ѿ�ɾ������)
-	3.�������޸ĵİ汾û�п��գ����Իָ��İ汾Ϊ֮ǰ�İ汾
 
-1.2.3 git commit --amend����
-	1.��һ���ύA�ļ���commit����ΪAL��
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+1.2问题
+1.2.1出现：fatal:Not a valid object name:'master'
+原因是没有提交一个对象，要先commit之后才会真正建立master分支，此时才可以建立其它分支。
+1.2.2执行以下操作：
+	1.对原先的文件进行修改；
+	2.未放入暂存区直接执行 git rm -f (git rm:已经删除不掉)
+	3.由于新修改的版本没有快照，所以恢复的版本为之前的版本
+
+1.2.3 git commit --amend操作
+	1.第一次提交A文件，commit内容为AL；
 	2.git add B;
-	3.git commit --amend ����commit���� ABL
-	��ע���������Ὣ�ݴ����е��ļ��ύ�� ������ϴ��ύ�����㻹δ���κ��޸ģ����磬���ϴ��ύ������ִ����
-	���������ô���ջᱣ�ֲ��䣬�������޸ĵ�ֻ���ύ��Ϣ��
+	3.git commit --amend 输入commit内容 ABL
+	备注：这个命令会将暂存区中的文件提交。 如果自上次提交以来你还未做任何修改（例如，在上次提交后马上执行了
+	此命令），那么快照会保持不变，而你所修改的只是提交信息。
 	$ git commit -m 'initial commit'
 	$ git add forgotten_file
 	$ git commit --amend
-	������ֻ����һ���ύ�����ڶ����ύ�������һ���ύ�Ľ��
+	最终你只会有一个提交——第二次提交将代替第一次提交的结果
 
-1.2.4 ȡ���ݴ���ļ�ϸ��
-A / B �ļ�
+1.2.4 取消暂存的文件细解
+A / B 文件
 $ git add *
 $ git commit A -m ''
-$ git commit B -m ''      ����ʵ����Ȼgit add * �������ύ���Է����Σ�
+$ git commit B -m ''      可以实现虽然git add * ；但是提交可以分批次；
 --------------------------------------------------------
-A / B �ļ�
+A / B 文件
 $ git status -s
- M 1.txt(��ɫ)
- M 2.txt(��ɫ)
+ M 1.txt(红色)
+ M 2.txt(红色)
 $ git add *
 $ git status -s
-M  1.txt(��ɫ)
-M  2.txt(��ɫ)
+M  1.txt(绿色)
+M  2.txt(绿色)
 $ git reset head 1.txt
 $ git status -s
- M 1.txt(��ɫ)
- M 2.txt(��ɫ)  ��1.txt�Ƴ��ݴ���
-��ע��ûʲô���ã�N���ļ����޸��ˣ�ִ��$ git add * ��������A�ļ�����Ҫһ���ŵ��ݴ���������ִ��$ git reset head A ;����A�ļ����߳���
-�ݴ���������N-1���ļ���Ҫcommit�Ļ���ֻ��һ��һ��commit���������������˹�����
+ M 1.txt(红色)
+ M 2.txt(绿色)  将1.txt移除暂存区
+备注：没什么乱用；N个文件都修改了，执行$ git add * 发现我们A文件不需要一并放到暂存区，所以执行$ git reset head A ;发现A文件被踢出了
+暂存区，但是N-1的文件需要commit的话，只能一个一个commit？？？？？增加了工作量
 
-1.2.5�������ļ����޸�
+1.2.5撤消对文件的修改
 	1.$ git pull
 	2.$ git add A 
 	3.$ git commit A -m ''
-	4.�޸��ļ����ݣ�������ָ��ļ�
+	4.修改文件内容，我们想恢复文件
 		4.1 $ git rm -f A
-		4.2 $ git commit -m ''��ʱ��ָ�����(gitû�д洢A���µĿ��գ����Իָ�֮��Ļ����ʼpull���ļ�)
+		4.2 $ git commit -m ''的时候恢复就行(git没有存储A最新的快照，所以恢复之后的还是最开始pull的文件)
 		||
-		4.1 $ git checkout A Ҳ����
-	��ע��
-	4.�޸��ļ����ݣ�������ָ��ļ�
-	5.һ�� $ git add A
+		4.1 $ git checkout A 也可以
+	备注：
+	4.修改文件内容，我们想恢复文件
+	5.一旦 $ git add A
 	6. $ git commit A -m ''
-	7.֮����ļ����ѻ����ˣ���Ϊ�Ѿ����չ���(ֻҪ�ǿ��չ��ã�push�����)
+	7.之后的文件很难回来了，因为已经快照过了(只要是快照过得，push都其次)
 
-1.2.6Զ�ֿ̲��ʹ��
+1.2.6远程仓库的使用
 	$ git remote
 	newPB
 	origin
@@ -228,10 +585,10 @@ $ git status -s
 	origin  https://github.com/fsdfsfd/Test.git (push)
 
 1.2.7 pull = fetch + merge
-�� git fetch ����ӷ�������ץȡ����û�е�����ʱ�����������޸Ĺ���Ŀ¼�е����ݡ� ��ֻ���ȡ����Ȼ
-�������Լ��ϲ��� Ȼ������һ��������� git pull �ڴ������������ĺ�����һ�� git fetch ������һ��
-git merge ��� �����һ����֮ǰ�½�����ʾ�����úõĸ��ٷ�֧������������ʽ�����û���ͨ�� clone
-�� checkout ����Ϊ�㴴���ģ�git pull ������ҵ�ǰ��֧�����ٵķ��������֧���ӷ�������ץȡ����Ȼ
-���Ժϲ����Ǹ�Զ�̷�֧��
+当 git fetch 命令从服务器上抓取本地没有的数据时，它并不会修改工作目录中的内容。 它只会获取数据然
+后让你自己合并。 然而，有一个命令叫作 git pull 在大多数情况下它的含义是一个 git fetch 紧接着一个
+git merge 命令。 如果有一个像之前章节中演示的设置好的跟踪分支，不管它是显式地设置还是通过 clone
+或 checkout 命令为你创建的，git pull 都会查找当前分支所跟踪的服务器与分支，从服务器上抓取数据然
+后尝试合并入那个远程分支。
 a
 
